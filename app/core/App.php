@@ -9,8 +9,34 @@ class App
 
   public function __construct()
   {
+    // CONTROLLER
     $url = $this->parseURL();
-    var_dump($url);
+    if (file_exists('../app/controllers/' . $url[0] . '.php')) {
+      $this->controller = $url[0];
+      unset($url[0]);
+    }
+
+    // PANGGIL CONTROLLERNYA
+    require_once '../app/controllers/' . $this->controller . '.php';
+    $this->controller = new $this->controller;
+
+
+    // METHOD
+    if (isset($url[1])) {
+      if (method_exists($this->controller, $url[1])) {
+        $this->method = $url[1];
+        unset($url[1]);
+      }
+    }
+
+
+    // PARAMS
+    if (!empty($url)) {
+      $this->params = array_values($url);
+    }
+
+    // JALANKAN CONTROLLER DAN METHOD, SERTA PARAMS JIKA ADA
+    call_user_func_array([$this->controller, $this->method], $this->params);
   }
 
   public function parseURL()

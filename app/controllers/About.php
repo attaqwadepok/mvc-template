@@ -1,8 +1,9 @@
 <?php
 
-class Home extends Controller
+class About
 {
   public function index()
   {
+    echo 'about/index';
   }
 }
