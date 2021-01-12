@@ -23,4 +23,14 @@ class Testing extends Controller
     $this->view('testing/index', $data);
     $this->view('templates/bootstrap_blank_template/footer');
   }
+
+  public function detail($id)
+  {
+    $data['title'] = 'Detail';
+    $data['testing'] = $this->model('Testing_model')->testing_detail($id);
+
+    $this->view('templates/bootstrap_blank_template/header', $data);
+    $this->view('testing/detail', $data);
+    $this->view('templates/bootstrap_blank_template/footer');
+  }
 }
