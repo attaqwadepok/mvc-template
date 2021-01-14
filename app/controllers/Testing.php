@@ -33,4 +33,12 @@ class Testing extends Controller
     $this->view('testing/detail', $data);
     $this->view('templates/bootstrap_blank_template/footer');
   }
+
+  public function tambah()
+  {
+    if ($this->model('Testing_model')->tambahDataModel($_POST) > 0) {
+      header('Location:' . BASEURL . '/testing');
+      exit;
+    }
+  }
 }

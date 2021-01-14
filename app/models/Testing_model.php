@@ -22,4 +22,20 @@ class Testing_model
     $this->db->bind('id', $id);
     return $this->db->single();
   }
+
+  public function tambahDataModel($data)
+  {
+    $query = "INSERT INTO testing_table
+              VALUES
+              ('', :nama, :usia, :jk, :gambar)";
+
+    $this->db->query($query);
+    $this->db->bind('nama', $data['nama']);
+    $this->db->bind('usia', $data['usia']);
+    $this->db->bind('jk', $data['jk']);
+    $this->db->bind('gambar', $data['gambar']);
+
+    $this->db->execute();
+    return $this->db->rowCount();
+  }
 }
